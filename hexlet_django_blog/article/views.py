@@ -23,7 +23,6 @@ articles = [
 def index(request, tag, article_id):
     for elem in articles:
         if elem['article_id'] == article_id and elem['tag'] == tag:
-            print(elem)
             return render(
                 request,
                 'article/index.html',

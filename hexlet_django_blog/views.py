@@ -1,19 +1,21 @@
 from django.shortcuts import render, redirect
+from django.views import View
 from django.views.generic.base import TemplateView
 from django.urls import reverse
+from hexlet_django_blog.article.models import Article
 
 
-# class IndexPage(TemplateView):
-#     template_name = "index.html"
-# 
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['who'] = 'World'
-#         return context
+class IndexPage(TemplateView):
+    template_name = "index.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['who'] = 'World'
+        return context
 
 
-def index(request):
-    return redirect('article', 'python', 42)
+# def index(request):
+#     return redirect('article', 'python', 42)
 
 
 def about(request):

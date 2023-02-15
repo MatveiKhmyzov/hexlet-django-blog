@@ -1,8 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views import View
 from django.views.generic.base import TemplateView
-from django.urls import reverse
-from hexlet_django_blog.article.models import Article
 
 
 class IndexPage(TemplateView):

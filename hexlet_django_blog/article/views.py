@@ -34,7 +34,27 @@ class ArticleFormCreateView(View):
         form = ArticleForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Success')
+            messages.success(request, 'Статья добавлена')
             return redirect('article_list')
-        messages.error(request, 'Error')
+        messages.error(request, 'Ошибка')
         return render(request, 'article/create.html', {'form': form})
+
+
+class ArticleFormEditView(View):
+
+    def get(self, request, *args, **kwargs):
+        article_id = kwargs.get('id')
+        article = Article.objects.get(id=article_id)
+        form = ArticleForm(instance=article)
+        return render(request, 'article/update.html', {'form': form, 'article_id': article_id})
+
+    def post(self, request, *args, **kwargs):
+        article_id = kwargs.get('id')
+        article = Article.objects.get(id=article_id)
+        form = ArticleForm(request.POST, instance=article)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Изменения применены')
+            return redirect('article_list')
+        messages.error(request, 'Ошибка')
+        return render(request, 'article/update.html', {'form': form, 'article_id': article_id})

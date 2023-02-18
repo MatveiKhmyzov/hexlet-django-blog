@@ -5,13 +5,23 @@ from hexlet_django_blog.article.models import Article
 from django.views import View
 from .forms import ArticleForm
 from django.contrib import messages
+from django.db.models import Q
 
 
 class IndexView(View):
+
     def get(self, request, *args, **kwargs):
-        articles = Article.objects.all()[:15]
+        query = request.GET.get('q', '')
+        articles = Article.objects.filter(Q(name__icontains=query))
         return render(request, 'article/index.html', context={
-            'articles': articles})
+            'articles': articles,
+            'query': query,
+        })
+
+    # def get(self, request, *args, **kwargs):
+    #     articles = Article.objects.all()[:15]
+    #     return render(request, 'article/index.html', context={
+    #         'articles': articles})
 
 
 class ArticleView(View):

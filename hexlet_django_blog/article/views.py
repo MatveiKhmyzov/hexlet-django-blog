@@ -68,3 +68,14 @@ class ArticleFormEditView(View):
             return redirect('article_list')
         messages.error(request, 'Ошибка')
         return render(request, 'article/update.html', {'form': form, 'article_id': article_id})
+
+
+class ArticleFormDestroyView(View):
+
+    def post(self, request, *args, **kwargs):
+        article_id = kwargs.get('id')
+        article = Article.objects.get(id=article_id)
+        form = ArticleForm(request.POST)
+        if form:
+            article.delete()
+        return redirect('article_list')

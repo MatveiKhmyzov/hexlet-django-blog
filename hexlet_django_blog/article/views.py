@@ -75,7 +75,6 @@ class ArticleFormDestroyView(View):
     def post(self, request, *args, **kwargs):
         article_id = kwargs.get('id')
         article = Article.objects.get(id=article_id)
-        form = ArticleForm(request.POST)
-        if form:
+        if article:
             article.delete()
         return redirect('article_list')

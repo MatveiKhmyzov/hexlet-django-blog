@@ -26,7 +26,7 @@
                 <a href="{% url 'articles_update' id=article.id %}">Редактировать</a>
                 <form action="{% url 'articles_destroy' id=article.id %}" method="post">
                     {% csrf_token %}
-                    <button type="submit" name="{% url 'articles_destroy' id=article.id %}" class="btn-link">Удалить</button>
+                    <button type="submit">Удалить</button>
                 </form>
             </div>
         </div>
